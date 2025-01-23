@@ -1,14 +1,41 @@
-module Backend
+require_relative "boot"
+
+require "rails"
+# Pick the frameworks you want:
+require "active_model/railtie"
+require "active_job/railtie"
+require "active_record/railtie"
+require "active_storage/engine"
+require "action_controller/railtie"
+require "action_mailer/railtie"
+require "action_mailbox/engine"
+require "action_text/engine"
+require "action_view/railtie"
+require "action_cable/engine"
+# require "rails/test_unit/railtie"
+
+# Require the gems listed in Gemfile, including any gems
+# you've limited to :test, :development, or :production.
+Bundler.require(*Rails.groups)
+
+module PortfolioBlog
   class Application < Rails::Application
-    # Railsのデフォルト設定をロード（バージョン8.0を使用）
+    # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 8.0
 
-    # Sprockets関連の不要な設定を削除
-    # `assets`に関する設定はAPIモードでは使用しません
-    # config.assets.compile = true
-
-    # APIモードを有効化
-    # 以下により、ミドルウェアが最小限に絞られ、ビューやアセットなどは生成されません
+    # APIモード設定
     config.api_only = true
+
+    # CORS設定
+    config.middleware.insert_before 0, Rack::Cors do
+      allow do
+        origins '*'
+        resource '*',
+          headers: :any,
+          methods: %i[get post put patch delete options head]
+      end
+    end
+
+    # その他の設定は環境ファイルにて上書き可能
   end
 end

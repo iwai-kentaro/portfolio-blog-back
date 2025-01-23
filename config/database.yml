@@ -1,26 +1,24 @@
 default: &default
-  adapter: sqlite3
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS", 5) %>
+  username: <%= ENV['PG_USER'] || 'your_local_username' %>
+  password: <%= ENV['PG_PASSWORD'] || 'your_local_password' %>
+  host: <%= ENV['PG_HOST'] || 'localhost' %>
   timeout: 5000
 
 development:
   <<: *default
-  database: db/development.sqlite3
+  database: development_database_name
 
 test:
   <<: *default
-  database: db/test.sqlite3
+  database: test_database_name
 
 production:
   <<: *default
-  adapter: postgresql
-  encoding: unicode
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   url: <%= ENV['DATABASE_URL'] %>
 
 action_cable_production:
   <<: *default
-  adapter: postgresql
-  encoding: unicode
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   url: <%= ENV['CABLE_DATABASE_URL'] || ENV['DATABASE_URL'] %>
