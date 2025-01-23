@@ -5,7 +5,6 @@ if %w[development test].include?(ENV['RAILS_ENV'])
   require 'dotenv/load'
 end
 
-
 # 必要なRailsフレームワークを選択
 require "active_model/railtie"
 require "active_job/railtie"
@@ -26,5 +25,16 @@ module YourAppName
 
     # APIモードを使用
     config.api_only = true
+
+    # CORSの設定を追加
+    config.middleware.insert_before 0, Rack::Cors do
+      allow do
+        origins 'https://portfolio-blog-front.vercel.app', 'http://localhost:3000'
+        resource '*',
+                 headers: :any,
+                 methods: [:get, :post, :put, :patch, :delete, :options, :head],
+                 credentials: true
+      end
+    end
   end
 end
