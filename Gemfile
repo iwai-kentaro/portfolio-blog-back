@@ -7,6 +7,7 @@ gem "puma", ">= 5.0"
 gem "rack-cors"
 gem "pg", "~> 1.2", group: :production
 gem "tzinfo-data", platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+gem 'dotenv-rails', groups: [:development, :test]
 
 group :development, :test do
   gem "sqlite3", "~> 1.4"
