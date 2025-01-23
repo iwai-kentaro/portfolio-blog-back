@@ -1,7 +1,10 @@
 require_relative 'boot'
 
 require 'rails'
-require 'dotenv/load' # ここに追加
+if %w[development test].include?(ENV['RAILS_ENV'])
+  require 'dotenv/load'
+end
+
 
 # 必要なRailsフレームワークを選択
 require "active_model/railtie"
