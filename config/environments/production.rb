@@ -89,5 +89,5 @@ Rails.application.configure do
   # 
   config.eager_load = true
   config.public_file_server.enabled = ENV['RAILS_SERVE_STATIC_FILES'].present?
-  config.assets.compile = false
+  # config.assets.compile = false
 end
