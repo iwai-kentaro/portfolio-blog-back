@@ -5,11 +5,11 @@ default: &default
 
 development:
   <<: *default
-  database: storage/development.sqlite3
+  database: db/development.sqlite3
 
 test:
   <<: *default
-  database: storage/test.sqlite3
+  database: db/test.sqlite3
 
 production:
   <<: *default
@@ -18,9 +18,9 @@ production:
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   url: <%= ENV['DATABASE_URL'] %>
 
-  cable:
-    <<: *default
-    adapter: postgresql
-    encoding: unicode
-    pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-    url: <%= ENV['DATABASE_URL'] %>
+action_cable_production:
+  <<: *default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  url: <%= ENV['CABLE_DATABASE_URL'] || ENV['DATABASE_URL'] %>
