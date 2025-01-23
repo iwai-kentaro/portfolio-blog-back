@@ -11,7 +11,7 @@ gem 'bootsnap', '>= 1.4.4', require: false
 
 
 group :development, :test do
-  gem "sqlite3", "~> 1.4"
+  gem "sqlite3", "~> 2.5"
   gem "debug", platforms: %i[mri mingw x64_mingw], require: "debug/prelude"
   gem 'dotenv-rails', groups: [:development, :test]
 end
