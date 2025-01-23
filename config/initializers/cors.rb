@@ -8,7 +8,7 @@
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
     # 許可するオリジンを設定
-    origins 'http://localhost:5173'
+    origins 'https://portfolio-blog-front.vercel.app'
 
     # 許可するリソースと HTTP メソッドを指定
     resource '*',
