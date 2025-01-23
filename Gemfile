@@ -8,6 +8,8 @@ gem "rack-cors"
 gem "pg", "~> 1.2", group: :production
 gem "tzinfo-data", platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'dotenv-rails', groups: [:development, :test]
+gem 'bootsnap', '>= 1.4.4', require: false
+
 
 group :development, :test do
   gem "sqlite3", "~> 1.4"
