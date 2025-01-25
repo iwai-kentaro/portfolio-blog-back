@@ -11,6 +11,14 @@ default: &default
 development:
   <<: *default
   database: <%= ENV['MYSQL_DB'] %>
+  username: <%= ENV['MYSQL_USER'] %>
+  password: <%= ENV['MYSQL_ROOT_PASSWORD'] %>
+  port: <%= ENV['MYSQL_PORT'] %> # 3306
+  host: kentaro_portfolio_db
+  # sslca: ./certs/isrgrootx1.pem
+  ssl_mode: DISABLED
+
+
 
 test:
   <<: *default
