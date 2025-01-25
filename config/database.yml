@@ -25,5 +25,4 @@ production:
   password: <%= ENV.fetch("STACKHERO_MYSQL_ROOT_PASSWORD", nil) %>
   host: <%= ENV.fetch("STACKHERO_MYSQL_HOST", nil) %>
   port: <%= ENV.fetch("STACKHERO_MYSQL_PORT", nil) %>
-  sslca: /etc/ssl/certs/ca-cert.pem
-
+  sslca: /etc/ssl/certs/isrgrootx1.pem

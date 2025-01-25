@@ -11,6 +11,9 @@
 # Ignore all environment files.
 /.env*
 
+certs/*.pem
+
+
 # Ignore all logfiles and tempfiles.
 /log/*
 /tmp/*
