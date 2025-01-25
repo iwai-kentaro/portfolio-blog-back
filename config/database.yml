@@ -1,28 +1,33 @@
 default: &default
   adapter: mysql2
-  encoding: utf8mb4
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  database: <%= ENV.fetch("MYSQL_DB") %>_development
-  username: <%= ENV.fetch("MYSQL_USER") %>
-  password: <%= ENV.fetch("MYSQL_ROOT_PASSWORD") %>
-  host: db
-  port: <%= ENV.fetch("MYSQL_PORT") { 3306 } %>
+  encoding: utf8
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS", 5) %>
+  username: <%= ENV['STACKHERO_MYSQL_USER'] || ENV['MYSQL_USER'] %>
+  password: <%= ENV['STACKHERO_MYSQL_ROOT_PASSWORD'] || ENV['MYSQL_ROOT_PASSWORD'] %>
+  host: <%= ENV['STACKHERO_MYSQL_HOST'] || 'localhost' %>
+  port: <%= ENV['STACKHERO_MYSQL_PORT'] || ENV['MYSQL_PORT'] %>
+  database: <%= ENV['STACKHERO_MYSQL_DATABASE'] || ENV['MYSQL_DB'] %>
 
 development:
   <<: *default
-  database: <%= ENV.fetch("MYSQL_DB") %>_development
+  database: <%= ENV['MYSQL_DB'] %>
 
 test:
   <<: *default
-  database: <%= ENV.fetch("MYSQL_DB") %>_test
-
+  database: <%= ENV['MYSQL_DB'] %>_test
 
 production:
-  adapter: mysql2
-  encoding: utf8mb4
-  database: <%= ENV.fetch("STACKHERO_MYSQL_DATABASE", nil) %>
-  username: <%= ENV.fetch("STACKHERO_MYSQL_USER", nil) %>
-  password: <%= ENV.fetch("STACKHERO_MYSQL_ROOT_PASSWORD", nil) %>
-  host: <%= ENV.fetch("STACKHERO_MYSQL_HOST", nil) %>
-  port: <%= ENV.fetch("STACKHERO_MYSQL_PORT", nil) %>
-  sslca: /etc/ssl/certs/isrgrootx1.pem
+  <<: *default
+  database: <%= ENV['STACKHERO_MYSQL_DATABASE'] %>
+  username: <%= ENV['STACKHERO_MYSQL_USER'] %>
+  password: <%= ENV['STACKHERO_MYSQL_ROOT_PASSWORD'] %>
+  host: <%= ENV['STACKHERO_MYSQL_HOST'] %>
+  port: <%= ENV['STACKHERO_MYSQL_PORT'] %>
+
+cable:
+  <<: *default
+  database: <%= ENV['STACKHERO_MYSQL_DATABASE'] %>_cable
+  username: <%= ENV['STACKHERO_MYSQL_USER'] %>
+  password: <%= ENV['STACKHERO_MYSQL_ROOT_PASSWORD'] %>
+  host: <%= ENV['STACKHERO_MYSQL_HOST'] %>
+  port: <%= ENV['STACKHERO_MYSQL_PORT'] %>
