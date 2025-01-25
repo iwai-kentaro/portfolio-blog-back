@@ -31,3 +31,11 @@ cable:
   password: <%= ENV['STACKHERO_MYSQL_ROOT_PASSWORD'] %>
   host: <%= ENV['STACKHERO_MYSQL_HOST'] %>
   port: <%= ENV['STACKHERO_MYSQL_PORT'] %>
+
+queue:
+  <<: *default
+  database: <%= ENV['STACKHERO_MYSQL_DATABASE'] %>_queue
+  username: <%= ENV['STACKHERO_MYSQL_USER'] %>
+  password: <%= ENV['STACKHERO_MYSQL_ROOT_PASSWORD'] %>
+  host: <%= ENV['STACKHERO_MYSQL_HOST'] %>
+  port: <%= ENV['STACKHERO_MYSQL_PORT'] %>
