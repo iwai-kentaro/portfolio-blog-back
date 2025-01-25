@@ -19,8 +19,8 @@ test:
 
 production:
   <<: *default
-  database: <%= ENV.fetch("MYSQL_DB", '') %>_production
-  username: <%= ENV.fetch("MYSQL_USER", '') %>
-  password: <%= ENV.fetch("MYSQL_ROOT_PASSWORD", '') %>
-  host: <%= ENV.fetch("MYSQL_HOST", '') %> # 本番環境の場合は環境変数から参照
-  port: <%= ENV.fetch("MYSQL_PORT", '') %>
+  database: <%= ENV.fetch("STACKHERO_MYSQL_DATABASE", "portfolio_blog") %> # 明示的にデータベース名を指定
+  username: <%= ENV.fetch("STACKHERO_MYSQL_USER", "root") %> # 環境変数から取得、デフォルトで root を設定
+  password: <%= ENV.fetch("STACKHERO_MYSQL_ROOT_PASSWORD", '') %> # 環境変数からパスワードを取得
+  host: <%= ENV.fetch("STACKHERO_MYSQL_HOST", '') %> # 環境変数からホストを取得
+  port: <%= ENV.fetch("STACKHERO_MYSQL_PORT", '') %> # 環境変数からポートを取得
