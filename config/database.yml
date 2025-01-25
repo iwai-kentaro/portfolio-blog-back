@@ -1,24 +1,26 @@
 default: &default
-  adapter: postgresql
-  encoding: unicode
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS", 5) %>
-  username: <%= ENV['PG_USER'] || 'your_local_username' %>
-  password: <%= ENV['PG_PASSWORD'] || 'your_local_password' %>
-  host: <%= ENV['PG_HOST'] || 'localhost' %>
-  timeout: 5000
+  adapter: mysql2
+  encoding: utf8mb4
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  database: <%= ENV.fetch("MYSQL_DB") %>_development
+  username: <%= ENV.fetch("MYSQL_USER") %>
+  password: <%= ENV.fetch("MYSQL_ROOT_PASSWORD") %>
+  host: db
+  port: <%= ENV.fetch("MYSQL_PORT") { 3306 } %>
 
 development:
   <<: *default
-  database: development_database_name
+  database: <%= ENV.fetch("MYSQL_DB") %>_development
 
 test:
   <<: *default
-  database: test_database_name
+  database: <%= ENV.fetch("MYSQL_DB") %>_test
+
 
 production:
   <<: *default
-  url: <%= ENV['DATABASE_URL'] %>
-
-action_cable_production:
-  <<: *default
-  url: <%= ENV['CABLE_DATABASE_URL'] || ENV['DATABASE_URL'] %>
+  database: <%= ENV.fetch("MYSQL_DB", '') %>_production
+  username: <%= ENV.fetch("MYSQL_USER", '') %>
+  password: <%= ENV.fetch("MYSQL_ROOT_PASSWORD", '') %>
+  host: <%= ENV.fetch("MYSQL_HOST", '') %> # 本番環境の場合は環境変数から参照
+  port: <%= ENV.fetch("MYSQL_PORT", '') %>

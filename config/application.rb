@@ -1,11 +1,8 @@
-require_relative 'boot'
+require_relative "boot"
 
-require 'rails'
-if %w[development test].include?(ENV['RAILS_ENV'])
-  require 'dotenv/load'
-end
+require "rails"
 
-# 必要なRailsフレームワークを選択
+# Pick the frameworks you want:
 require "active_model/railtie"
 require "active_job/railtie"
 require "active_record/railtie"
@@ -16,25 +13,37 @@ require "action_mailbox/engine"
 require "action_text/engine"
 require "action_view/railtie"
 require "action_cable/engine"
+# require "rails/test_unit/railtie"
 
+# Require the gems listed in Gemfile, including any gems
+# you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-module YourAppName
+module App
   class Application < Rails::Application
+    # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 8.0
-
-    # APIモードを使用
+    # APIモードの設定
     config.api_only = true
+    # Please, add to the `ignore` list any other `lib` subdirectories that do
+    # not contain `.rb` files, or that should not be reloaded or eager loaded.
+    # Common ones are `templates`, `generators`, or `middleware`, for example.
+    config.autoload_lib(ignore: %w[assets tasks])
 
-    # CORSの設定を追加
-    config.middleware.insert_before 0, Rack::Cors do
-      allow do
-        origins 'https://portfolio-blog-front.vercel.app', 'http://localhost:3000'
-        resource '*',
-                 headers: :any,
-                 methods: [:get, :post, :put, :patch, :delete, :options, :head],
-                 credentials: true
-      end
+    # Configuration for the application, engines, and railties goes here.
+    #
+    # These settings can be overridden in specific environments using the files
+    # in config/environments, which are processed later.
+    #
+    # config.time_zone = "Central Time (US & Canada)"
+    # config.eager_load_paths << Rails.root.join("extras")
+
+    # Don't generate system test files.
+    config.generators do |g|
+      g.helper false      # helperファイルを生成しない
+      g.assets false      # アセットファイルを生成しない
+      g.view_specs false  # ビュースペックを生成しない
     end
+    config.generators.system_tests = nil
   end
 end

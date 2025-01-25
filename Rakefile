@@ -3,8 +3,4 @@
 
 require_relative "config/application"
 
-if %w[development test].include?(ENV['RAILS_ENV'])
-  require 'dotenv/load'
-end
-
 Rails.application.load_tasks
