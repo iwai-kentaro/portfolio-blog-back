@@ -24,10 +24,12 @@ services:
     volumes:
       - db-data:/var/lib/mysql
     environment:
-      MYSQL_DATABASE: ${MYSQL_DB} # 環境変数から参照
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD} # 環境変数から参照
+      MYSQL_DATABASE: ${STACKHERO_MYSQL_DATABASE} # 環境変数から参照
+      MYSQL_USER: ${STACKHERO_MYSQL_USER} # 環境変数から参照
+      MYSQL_PASSWORD: ${STACKHERO_MYSQL_ROOT_PASSWORD} # 環境変数から参照
+      MYSQL_ROOT_PASSWORD: ${STACKHERO_MYSQL_ROOT_PASSWORD} # 環境変数から参照
       TZ: "Asia/Tokyo"
     ports:
-      - "${MYSQL_PORT}:3306" # 環境変数から参照
+      - "${STACKHERO_MYSQL_PORT}:3306" # 環境変数から参照
 volumes:
   db-data:
