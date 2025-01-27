@@ -1,5 +1,7 @@
 class Api::V1::PostsController < ApplicationController
   def index
+    # posts = @current_user.posts
+    # render json: posts.as_json(only: [ :id, :title ])
     @posts = Post.all
     render json: @posts
   end

@@ -11,8 +11,8 @@
 
 # デフォルトのユーザーを作成
 default_user = User.create!(
-  name: "Default User",
-  email: "default@example.com",
+  name: "Default User2",
+  email: "default2@example.com",
   password: "password"
 )
 
@@ -23,6 +23,8 @@ Post.update_all(user_id: default_user.id)
 Post.create!(
   [
     { title: "Post 1", content: "This is the first post.", user_id: default_user.id },
-    { title: "Post 2", content: "This is the second post.", user_id: default_user.id }
+    { title: "Post 2", content: "This is the second post.", user_id: default_user.id },
+    { title: "Post 3", content: "This is the third post.", user_id: default_user.id },
+    { title: "Post 4", content: "This is the five post.", user_id: default_user.id }
   ]
 )
