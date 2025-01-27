@@ -22,6 +22,7 @@ services:
   db:
     container_name: kentaro_portfolio_db
     image: mysql:8.0
+    command: --require_secure_transport=OFF
     volumes:
       - db-data:/var/lib/mysql
     environment:
