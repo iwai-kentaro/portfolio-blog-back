@@ -18,4 +18,9 @@ class Api::V1::SessionsController < ApplicationController
       render json: { error: "Invalid email or password" }, status: :unauthorized
     end
   end
+
+  def destroy
+    @current_user.update(jti: SecureRandom.uuid)
+    render json: { message: "Logged out" }, status: :ok
+  end
 end
