@@ -17,12 +17,16 @@ development:
   host: kentaro_portfolio_db
   # sslca: ./certs/isrgrootx1.pem
   ssl_mode: DISABLED
+  # ssl_mode: REQUIRED
+
 
 
 
 test:
   <<: *default
   database: <%= ENV['MYSQL_DB'] %>_test
+  # ssl_mode: DISABLED
+
 
 production:
   <<: *default
